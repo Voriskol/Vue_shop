@@ -22,6 +22,34 @@ const onChangeSearchInput = (event) => {
   filters.searchQuery = event.target.value;
 };
 
+const fetchFavorites = async () => {
+  try {
+    const { data: favorites } = await axios.get(
+      `https://666e03bcd9ab9fc4.mokky.dev/favorites`
+    );
+    items.value = items.value.map((item) => {
+      const favorite = favorites.find(
+        (favorite) => favorite.parentId === item.id
+      );
+
+      if (!favorite) {
+        return item;
+      }
+      return {
+        ...item,
+        isFavorite: true,
+        favoriteId: favorite.id,
+      };
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const addToFavorite = async (item) => {
+  item.isFavorite = true;
+};
+
 //функция которая при каждом изменении фильтров или при первом рендере выполняет запрос на бэкенд
 const fetchItems = async () => {
   try {
@@ -38,13 +66,20 @@ const fetchItems = async () => {
       }
     );
 
-    items.value = data;
+    items.value = data.map((obj) => ({
+      ...obj,
+      isFavorite: false,
+      isAdded: false,
+    }));
   } catch (err) {
     console.log(err);
   }
 };
 
-onMounted(fetchItems);
+onMounted(async () => {
+  await fetchItems();
+  await fetchFavorites();
+});
 
 watch(filters, fetchItems);
 </script>

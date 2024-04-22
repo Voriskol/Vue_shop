@@ -7,10 +7,6 @@ defineProps({
 const onClickAdd = () => {
   alert("Добавить");
 };
-
-const onClickFavorite = () => {
-  alert("В закладки");
-};
 </script>
 
 <template>
@@ -21,10 +17,8 @@ const onClickFavorite = () => {
       :price="item.price"
       :title="item.title"
       :image-url="item.imageUrl"
-      :is-added="item.isAdded"
-      :is-favorite="false"
       :onClickAdd="onClickAdd"
-      :onClickFavorite="onClickFavorite"
+      :is-favorite="item.isFavorite"
     />
   </div>
 </template>
