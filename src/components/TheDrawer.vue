@@ -2,6 +2,7 @@
 import DrawerHead from "./DrawerHead.vue";
 import CartItemList from "./CartItemList.vue";
 
+const emit = defineEmits(["createOrder"]);
 defineProps({
   totalPrice: Number,
   vatPrice: Number,
@@ -28,12 +29,21 @@ defineProps({
         <b>{{ vatPrice }} руб.</b>
       </div>
     </div>
-
-    <button
-      disabled=""
-      class="bg-lime-500 w-full rounded-xl py-3 text-white disabled:bg-slate-300 cursor-pointer hover:shadow-lg transition hover:-translate-y-2 hover:bg-lime-600 active:bg-lime-700"
-    >
-      Оформить заказ
-    </button>
+    <div v-if="totalPrice">
+      <button
+        @click="() => emit('createOrder')"
+        class="bg-lime-500 w-full rounded-xl py-3 text-white cursor-pointer hover:shadow-lg transition hover:-translate-y-2 hover:bg-lime-600 active:bg-lime-700"
+      >
+        Оформить заказ
+      </button>
+    </div>
+    <div v-else>
+      <button
+        disabled="disabled"
+        class="bg-lime-500 w-full rounded-xl py-3 text-white disabled:bg-slate-300 transition hover:bg-lime-600 active:bg-lime-700"
+      >
+        Оформить заказ
+      </button>
+    </div>
   </div>
 </template>

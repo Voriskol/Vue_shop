@@ -36,8 +36,25 @@ const addToCart = (item) => {
 };
 
 const removeFromCart = (item) => {
-  cart.value.splice(cart.value.indexOf(item));
+  cart.value.splice(cart.value.indexOf(item), 1);
   item.isAdded = false;
+};
+
+const createOrder = async () => {
+  try {
+    const { data } = await axios.post(
+      "https://666e03bcd9ab9fc4.mokky.dev/orders",
+      {
+        items: cart.value,
+        totalPrice: totalPrice.value,
+      }
+    );
+
+    cart.value = [];
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 const onClickAddPlus = (item) => {
@@ -46,7 +63,6 @@ const onClickAddPlus = (item) => {
   } else {
     removeFromCart(item);
   }
-  console.log(cart);
 };
 
 // функции следящие за изменением селекта и наших фильтров
@@ -149,6 +165,7 @@ provide("cart", { cart, closeDrawer, openDrawer, addToCart, removeFromCart });
     v-if="drawerOpened"
     :total-price="totalPrice"
     :vat-price="vatPrice"
+    @create-order="createOrder"
   />
   <div class="bg-white w-4/5 m-auto rounded-xl shadow-xl mt-14">
     <TheHeader :total-price="totalPrice" @open-drawer="openDrawer" />
