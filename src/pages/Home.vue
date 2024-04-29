@@ -122,9 +122,9 @@ watch(filters, fetchItems);
 </script>
 
 <template>
-  <div class="flex justify-between items-center">
+  <div class="flex justify-between items-center flex-wrap">
     <h2 class="text-3xl font-bold mb-8">Все кроссовки</h2>
-    <div class="flex items-center gap-5">
+    <div class="flex items-center gap-5 flex-wrap">
       <select
         @change="onChangeSelect"
         name=""
