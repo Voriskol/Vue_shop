@@ -4,7 +4,6 @@ import axios from "axios";
 import TheHeader from "./components/TheHeader.vue";
 import TheDrawer from "./components/TheDrawer.vue";
 
-
 /* Корзина */
 const cart = ref([]);
 
@@ -43,9 +42,10 @@ const createOrder = async () => {
         totalPrice: totalPrice.value,
       }
     );
-
+    let order_id = data.id;
     cart.value = [];
-    return data;
+    alert(`Заказ успешно оформлен. Номер вашего заказа: ${order_id}`);
+    return { ...data, order_id };
   } catch (err) {
     console.log(err);
   }
