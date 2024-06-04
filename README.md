@@ -1,6 +1,6 @@
 # vue-shop
 
-[Link to my project](vue-shop-theta.vercel.app)
+[Link to my project](https://vue-shop-theta.vercel.app/)
 
 ## Technologies
 
