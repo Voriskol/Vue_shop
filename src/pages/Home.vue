@@ -143,7 +143,7 @@ watch(filters, fetchItems);
           @input="onChangeSearchInput"
           type="text"
           placeholder="Поиск..."
-          class="border rounded-xl py-2 h-10 pl-10 pr-4 outline-none focus:border-slate-300"
+          class="border rounded-xl py-2 h-10 pl-10 pr-4 outline-none focus:border-slate-300 mr-3"
         />
       </div>
     </div>
